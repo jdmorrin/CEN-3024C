@@ -23,11 +23,7 @@
 // AKA function will remove html tags, punctuation, and capitalization
 // Write output into a new file, and use the new file as the source for the rest of the code
 
-/*
-NEW PLAN
-I. Create a class called /WordCount/ that will store unique words from the document /String word/ and their frequency /int freq/
-II. 
-*/
+
 package cen_mod2_003;
 
 import java.io.File;
