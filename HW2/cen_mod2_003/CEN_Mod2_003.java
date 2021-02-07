@@ -48,7 +48,7 @@ public class CEN_Mod2_003 {
 
     public static void main(String[] args) {
         
-        File rawPoem = new File("text3.txt");
+        File rawPoem = new File("poem.txt");
         try {
             File cleanedPoem = cleanPoem(rawPoem);
             List <WordCount> wordCount = listWords(cleanedPoem);
