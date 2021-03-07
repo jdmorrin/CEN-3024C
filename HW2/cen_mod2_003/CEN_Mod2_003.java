@@ -48,11 +48,11 @@ public class CEN_Mod2_003 {
 
     public static void main(String[] args) {
         
-        File rawPoem = new File("poem.txt");
+        File rawPoem = new File("C:\\Users\\Juandi.DESKTOP-SD425KQ\\Desktop\\Sites\\CEN-3024C\\HW2\\cen_mod2_003\\poem.txt");
         try {
             File cleanedPoem = cleanPoem(rawPoem);
-            List <WordCount> wordCount = listWords(cleanedPoem);
-            wordCount = countWords(cleanedPoem, wordCount);
+            List <WordCount> wordCount = WordCount.listWords(cleanedPoem);
+            wordCount = WordCount.countWords(cleanedPoem, wordCount);
             
             Collections.sort(wordCount);
             
@@ -60,18 +60,28 @@ public class CEN_Mod2_003 {
                 System.out.println(word);
             }
             
+            cleanedPoem.delete();   
         } catch (IOException ex) {
             Logger.getLogger(CEN_Mod2_003.class.getName()).log(Level.SEVERE, null, ex);
         } 
         
     }   // end main
     
-    // This method parses the file to just include the actual oem
-    // Also eliminates HTML tags and converts everything to plain texxt
+    
+    /**
+     * 
+     * This method parses the file to just include the actual oem
+     * Also eliminates HTML tags and converts everything to plain texxt
+     * 
+     * @param file
+     * @return
+     * @throws IOException
+     * @throws FileNotFoundException 
+     */
     public static File cleanPoem(File file) throws IOException, FileNotFoundException{
         Scanner scan = new Scanner(file);
         
-        File parsedFile = new File("parsedFile");
+        File parsedFile = new File("parsedFile.txt");
         FileWriter poemWriter = new FileWriter(parsedFile, true);       
         PrintWriter poemPrinter = new PrintWriter(poemWriter);
         
@@ -98,46 +108,6 @@ public class CEN_Mod2_003 {
         
     }
     
-    // This method records all unique words in the poem, but does not count them
-    public static List <WordCount> listWords(File textFile) throws FileNotFoundException {
-        Scanner scan = new Scanner(textFile);
-        List <WordCount> list = new ArrayList();
-        
-        // Loop goes through every String in the poem
-        while(scan.hasNext()){
-            
-            // replaceAll() makes it so that punctuatio surrounding the string is ignored
-            // toLowerCase() ignores capitalization
-            String currentWord = scan.next().replaceAll("[\\W]","").toLowerCase(); 
-            WordCount current = new WordCount(currentWord);
-            
-            // If the list does not already contain a WordCount with the currentWord in it
-            // Then add a new Word Count to the list                                 
-            if(!list.contains(new WordCount(currentWord)))
-                list.add(new WordCount(currentWord));            
-            
-        }
-        
-        return list;
-    }   // end listWords
     
-    public static List <WordCount> countWords(File file, List <WordCount> list) throws FileNotFoundException{
-        
-        int count = 0;
-        
-        for(WordCount wCount : list){
-            Scanner scan = new Scanner(file);
-            while(scan.hasNext()){
-                String str = scan.next().replaceAll("[\\W]","").toLowerCase(); 
-                if(wCount.getWord().equals(str))
-                    count++;
-            }
-           
-            wCount.setFreq(count);
-            count = 0;
-            scan.close();
-        }
-        return list;
-    } // end countWords
     
 }   // end class
