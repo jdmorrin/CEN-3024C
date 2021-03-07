@@ -5,7 +5,12 @@
  */
 package cen_mod2_003;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 
 
 public class WordCount implements Comparable <WordCount>{
@@ -32,6 +37,53 @@ public class WordCount implements Comparable <WordCount>{
         this.freq = freq;
     }
 
+    /**
+     * 
+     * This method records all unique words in the poem, but does not count them
+     * 
+     * @param textFl
+     * @return
+     * @throws FileNotFoundException 
+     */
+    public static List <WordCount> listWords(File textFl) throws FileNotFoundException{
+        List <WordCount> list = new ArrayList<WordCount>();
+        Scanner scan = new Scanner(textFl);
+        
+        // Loop goes through every String in the poem
+        while(scan.hasNext()){
+            // replaceAll() makes it so that punctuatio surrounding the string is ignored
+            // toLowerCase() ignores capitalization
+            String currentWord = scan.next().replaceAll("[\\W]","").toLowerCase(); 
+            WordCount current = new WordCount(currentWord);
+            
+            // If the list does not already contain a WordCount with the currentWord in it
+            // Then add a new Word Count to the list                                 
+            if(!list.contains(new WordCount(currentWord)))
+                list.add(new WordCount(currentWord));       
+        }
+        
+        return list;
+    }
+    
+    public static List <WordCount> countWords(File file, List <WordCount> list) throws FileNotFoundException{
+        
+        int count = 0;
+        
+        for(WordCount wCount : list){
+            Scanner scan = new Scanner(file);
+            while(scan.hasNext()){
+                String str = scan.next().replaceAll("[\\W]","").toLowerCase(); 
+                if(wCount.getWord().equals(str))
+                    count++;
+            }
+           
+            wCount.setFreq(count);
+            count = 0;
+            scan.close();
+        }
+        return list;
+    } // end countWords
+    
     // Need to override the equals method so that the contains() method works
     @Override
     public boolean equals(Object obj) {
