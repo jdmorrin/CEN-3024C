@@ -11,8 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import javafx.event.ActionEvent;
 
-
+/**
+ * 
+ * @author Juandi
+ * @implements Comparable
+ */
 public class WordCount implements Comparable <WordCount>{
     private String word;
     private int freq;
@@ -36,13 +41,14 @@ public class WordCount implements Comparable <WordCount>{
     public void setFreq(int freq) {
         this.freq = freq;
     }
-
+    
+    
     /**
      * 
-     * This method records all unique words in the poem, but does not count them
+     * This method records all unique words in the text document, but does not count them
      * 
      * @param textFl
-     * @return
+     * @return 
      * @throws FileNotFoundException 
      */
     public static List <WordCount> listWords(File textFl) throws FileNotFoundException{
@@ -65,6 +71,15 @@ public class WordCount implements Comparable <WordCount>{
         return list;
     }
     
+    /**
+     * 
+     * Takes a list of words and counts how many times they appear in a text document
+     * 
+     * @param file A text document
+     * @param list The list of words that will be counted
+     * @return
+     * @throws FileNotFoundException 
+     */
     public static List <WordCount> countWords(File file, List <WordCount> list) throws FileNotFoundException{
         
         int count = 0;
@@ -85,6 +100,13 @@ public class WordCount implements Comparable <WordCount>{
     } // end countWords
     
     // Need to override the equals method so that the contains() method works
+    /**
+     * 
+     * Used for sorting.
+     * 
+     * @param obj
+     * @return 
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -103,6 +125,14 @@ public class WordCount implements Comparable <WordCount>{
         return true;
     }
 
+    
+    /**
+     * 
+     * Compares WordCount objects by frequency
+     * 
+     * @param o 
+     * @return 
+     */
     @Override
     public int compareTo(WordCount o) {
         return o.getFreq() - this.getFreq();
@@ -113,8 +143,6 @@ public class WordCount implements Comparable <WordCount>{
     public String toString() {
         return this.getWord() + " : " + this.getFreq();
     }
-    
-    
-    
+        
 }
 

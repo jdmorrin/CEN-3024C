@@ -1,27 +1,3 @@
-// Making a text anylyzer that counts and sorts words based on frequency
-
-// I. Create two arrays or lists
-//      a. one that stores all unique words in the file /words/
-//      b. one that stores word frequencies /freq/
-// II. Start a loop to count the words
-//      1. Begin to read file
-//      2. read a word and store it in a string /currentWord/
-//          a. if the word being read is in the /words/ list read the next word in the file
-//      3. Go trhough file until all instances of /currentWord/ have been recorded into an int /count/
-//      4. When all instances of /currentWord/ have been recorded
-//          a. store value of /currentWord/ in the /words/ list
-//          b. store value of /cunt/ in the /freq/ list
-//      5. Go back to beginning of file until every unique word in the file can be found in the /words/ list
-//  III. Sorting
-
-// Solution: Instead of generating two "while" loops, one nested inside the other, make two separate while loops.
-// One will store uniqie words into an array list
-// Use that array list as the basis for the second while loop 
-// Maybe
-
-// Make function that will convert file from HTML code to just a text file
-// AKA function will remove html tags, punctuation, and capitalization
-// Write output into a new file, and use the new file as the source for the rest of the code
 
 
 package cen_mod2_003;
@@ -31,20 +7,29 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 
 /**
  *
  * @author Juan David Morrell Rincon
  */
-public class CEN_Mod2_003 {
+public class CEN_Mod2_003 extends Application{
 
     public static void main(String[] args) {
         
@@ -55,18 +40,54 @@ public class CEN_Mod2_003 {
             wordCount = WordCount.countWords(cleanedPoem, wordCount);
             
             Collections.sort(wordCount);
+            MainController.setWords(wordCount);
             
             for(WordCount word : wordCount){
                 System.out.println(word);
             }
+            
             
             cleanedPoem.delete();   
         } catch (IOException ex) {
             Logger.getLogger(CEN_Mod2_003.class.getName()).log(Level.SEVERE, null, ex);
         } 
         
+        launch(args);
     }   // end main
     
+    @Override
+    public void start(Stage stage) throws Exception {
+       
+//        Button showBtn = new Button("Show Word Occurrence");
+//        Button exit = new Button("Quit");
+//        exit.setOnAction(e -> System.exit(0));
+//        
+//        Label message = new Label();
+//        
+//        EventHandler <ActionEvent> showOccurrence = new EventHandler<ActionEvent>(){
+//            @Override
+//            public void handle(ActionEvent t) {
+//                message.setText("Hello");
+//                
+//                // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//            
+//        };
+//        
+//        showBtn.setOnAction(showOccurrence);
+//        VBox root = new VBox();
+//        root.getChildren().addAll(showBtn, exit, message);
+        
+        Parent root = FXMLLoader.load(getClass().getResource("/cen_mod2_003/main.fxml"));
+
+        Scene scene = new Scene(root, 600, 222);
+        
+        stage.setScene(scene);
+        stage.setTitle("Kill mee");
+        stage.show();
+        
+        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     /**
      * 
@@ -107,7 +128,7 @@ public class CEN_Mod2_003 {
         return parsedFile;     
         
     }
-    
-    
+
+ 
     
 }   // end class
