@@ -11,8 +11,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 /**
- *
- * @author Juandi
+ * Main FXML controller for Scene Builder GUI
+ * 
+ * @author Juan David Morrell Rincon
+ * @version 2.0
  */
 public class MainController {
     
@@ -30,7 +32,13 @@ public class MainController {
     public static void setWords(List<WordCount> list) {
         words = list;
     }
-        
+    
+/**
+ * Goes through a list of WordCount objects, and displays each object.
+ * 
+ * @param e 
+ * 
+ */    
     public void display(ActionEvent e){
         
         message.setText(words.get(index).toString());

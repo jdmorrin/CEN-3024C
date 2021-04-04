@@ -26,8 +26,10 @@ import javafx.stage.Stage;
 
 
 /**
- *
+ * The main class
+ * 
  * @author Juan David Morrell Rincon
+ * @version 2.0
  */
 public class CEN_Mod2_003 extends Application{
 
@@ -55,6 +57,13 @@ public class CEN_Mod2_003 extends Application{
         launch(args);
     }   // end main
     
+    /**
+     * 
+     * The basic GUI skeleton. I still don't understand how GUIs work, but somehow I got this to display.
+     * 
+     * @param stage
+     * @throws Exception 
+     */
     @Override
     public void start(Stage stage) throws Exception {
        
@@ -83,7 +92,7 @@ public class CEN_Mod2_003 extends Application{
         Scene scene = new Scene(root, 600, 222);
         
         stage.setScene(scene);
-        stage.setTitle("Kill mee");
+        stage.setTitle("Word Occurrences");
         stage.show();
         
         // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -91,8 +100,8 @@ public class CEN_Mod2_003 extends Application{
     
     /**
      * 
-     * This method parses the file to just include the actual oem
-     * Also eliminates HTML tags and converts everything to plain texxt
+     * This method parses the file to just include the actual poem.
+     * Also eliminates HTML tags and converts everything to plain text
      * 
      * @param file
      * @return

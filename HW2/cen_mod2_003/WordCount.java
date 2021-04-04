@@ -15,8 +15,11 @@ import java.util.Scanner;
 
 /**
  * 
- * @author Juandi
+ * The countable instances of a unique string
+ * 
+ * @author Juan David Morrell Rincon
  * @implements Comparable
+ * @version 2.0
  */
 public class WordCount implements Comparable <WordCount>{
     private String word;
@@ -47,8 +50,8 @@ public class WordCount implements Comparable <WordCount>{
      * 
      * This method records all unique words in the text document, but does not count them
      * 
-     * @param textFl
-     * @return 
+     * @param textFl a text file
+     * @return a List of WordCounts objects with an initialized "word" field
      * @throws FileNotFoundException 
      */
     public static List <WordCount> listWords(File textFl) throws FileNotFoundException{
@@ -77,7 +80,7 @@ public class WordCount implements Comparable <WordCount>{
      * 
      * @param file A text document
      * @param list The list of words that will be counted
-     * @return
+     * @return a List of WordCount objects with set "freq" fields
      * @throws FileNotFoundException 
      */
     public static List <WordCount> countWords(File file, List <WordCount> list) throws FileNotFoundException{
@@ -102,10 +105,10 @@ public class WordCount implements Comparable <WordCount>{
     // Need to override the equals method so that the contains() method works
     /**
      * 
-     * Used for sorting.
+     * Equals method. Used for sorting.
      * 
      * @param obj
-     * @return 
+     * @return false if the word field of the objects do not match
      */
     @Override
     public boolean equals(Object obj) {
