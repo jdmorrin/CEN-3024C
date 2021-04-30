@@ -42,7 +42,7 @@ public class MainController {
     public void display(ActionEvent e){
         
         message.setText(words.get(index).toString());
-        System.out.println(words.get(index).toString());
+        // System.out.println(words.get(index).toString());
         
         index++;
         if(index == words.size())

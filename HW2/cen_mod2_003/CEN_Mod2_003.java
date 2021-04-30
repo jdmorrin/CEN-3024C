@@ -35,21 +35,28 @@ public class CEN_Mod2_003 extends Application{
 
     public static void main(String[] args) {
         
-        File rawPoem = new File("C:\\Users\\Juandi.DESKTOP-SD425KQ\\Desktop\\Sites\\CEN-3024C\\HW2\\cen_mod2_003\\poem.txt");
+        // Change the file path when useing a new Computer
+        File rawPoem = new File("C:\\Users\\denym\\Desktop\\Generic\\CEN-3024C\\HW2\\cen_mod2_003\\poem.txt");
         try {
             File cleanedPoem = cleanPoem(rawPoem);
             List <WordCount> wordCount = WordCount.listWords(cleanedPoem);
             wordCount = WordCount.countWords(cleanedPoem, wordCount);
             
             Collections.sort(wordCount);
+            cleanedPoem.delete();   
+            
+            Database db = new Database();
+            db.updateDatabase(wordCount);
+            db.printResults();
+            
             MainController.setWords(wordCount);
             
-            for(WordCount word : wordCount){
-                System.out.println(word);
-            }
+//            for(WordCount word : wordCount){
+//                System.out.println(word);
+//            }
             
             
-            cleanedPoem.delete();   
+            
         } catch (IOException ex) {
             Logger.getLogger(CEN_Mod2_003.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -112,6 +119,7 @@ public class CEN_Mod2_003 extends Application{
         Scanner scan = new Scanner(file);
         
         File parsedFile = new File("parsedFile.txt");
+        
         FileWriter poemWriter = new FileWriter(parsedFile, true);       
         PrintWriter poemPrinter = new PrintWriter(poemWriter);
         
