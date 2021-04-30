@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cen_mod2_test;
+package test.cen_mod2_test;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
